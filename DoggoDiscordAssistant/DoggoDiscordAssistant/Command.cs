@@ -8,10 +8,12 @@ namespace DoggoDiscordAssistant
 {
     abstract class Command
     {
-        public abstract string CommandName { get; set; }
-        public abstract string Description { get; set; }
-        public abstract string Help { get; set; }
+        public abstract string Name { get; }
+        public abstract string Identifier { get; }
+        public abstract string Description { get; }
+        public abstract string Help { get; }
 
         public abstract void Execute();
+
     }
 }

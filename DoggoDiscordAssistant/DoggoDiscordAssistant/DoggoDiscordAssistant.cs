@@ -13,6 +13,7 @@ namespace DoggoDiscordAssistant
         {
             Logging.consoleLog("Connecting to server...", Logging.logType.System);
             Connect(3, 1000);
+            MessageReceived += DoggoDiscordAssistant_MessageReceived;
             while (true)
             {
                 Console.ReadLine();
@@ -52,6 +53,11 @@ namespace DoggoDiscordAssistant
                     }
                 }
             }
+        }
+
+        private void DoggoDiscordAssistant_MessageReceived(object sender, MessageEventArgs e)
+        {
+            CommandEngine.parseInput(e.Message.Text);
         }
     }
 }
