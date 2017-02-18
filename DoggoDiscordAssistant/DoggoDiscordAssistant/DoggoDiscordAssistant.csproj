@@ -71,6 +71,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminConsole.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="CommandEngine.cs" />
     <Compile Include="DoggoDiscordAssistant.cs" />

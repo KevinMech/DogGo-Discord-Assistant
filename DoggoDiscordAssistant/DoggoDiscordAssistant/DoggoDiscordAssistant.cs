@@ -9,14 +9,19 @@ namespace DoggoDiscordAssistant
 {
     class DoggoDiscordAssistant : DiscordClient
     {
+        public bool Debug { get; set; }
+
         public DoggoDiscordAssistant(Action<DiscordConfigBuilder> configFunc) : base (configFunc)
         {
             Logging.consoleLog("Connecting to server...", Logging.logType.System);
             Connect(3, 1000);
             MessageReceived += DoggoDiscordAssistant_MessageReceived;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine();
             while (true)
             {
-                Console.ReadLine();
+                AdminConsole.parseAdminInput(Console.ReadLine(), this);
+                Console.ForegroundColor = ConsoleColor.White;
             }
         }
 
