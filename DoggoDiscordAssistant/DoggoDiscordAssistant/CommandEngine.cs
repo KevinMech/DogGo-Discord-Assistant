@@ -14,7 +14,7 @@ namespace DoggoDiscordAssistant
         /// Queries the input of users chat and retrieves the command, flag and flag parameters
         /// </summary>
         /// <param name="message"></param>
-        public static void parseInput(string message)
+        public static void parseInput(DoggoDiscordAssistant bot, string message)
         {
             //Check to see if message starts with command symbol.
             if (message[0] == '>')
@@ -24,7 +24,11 @@ namespace DoggoDiscordAssistant
                 {
                     foreach(String word in splitMessage)
                     {
-                        if (word == command.Identifier) command.Execute();
+                        if (word == command.Identifier)
+                        {
+                            command.Execute();
+                            if (bot.Debug) Logging.consoleLog("Command Executed!", Logging.logType.System);
+                        }
                     }
                 }
             }

@@ -62,7 +62,7 @@ namespace DoggoDiscordAssistant
 
         private void DoggoDiscordAssistant_MessageReceived(object sender, MessageEventArgs e)
         {
-            CommandEngine.parseInput(e.Message.Text);
+            CommandEngine.parseInput(this, e.Message.Text);
         }
     }
 }
