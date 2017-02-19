@@ -13,7 +13,7 @@ namespace DoggoDiscordAssistant
         public abstract string Description { get; }
         public abstract string Help { get; }
 
-        public abstract void Execute();
+        public abstract void Execute(Discord.Channel channel);
 
     }
 }
