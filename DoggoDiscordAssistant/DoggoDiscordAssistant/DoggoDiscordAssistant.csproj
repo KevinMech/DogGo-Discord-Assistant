@@ -76,6 +76,7 @@
     <Compile Include="CommandEngine.cs" />
     <Compile Include="DoggoDiscordAssistant.cs" />
     <Compile Include="Logging.cs" />
+    <Compile Include="Ping.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Token.cs" />

@@ -15,7 +15,8 @@ namespace DoggoDiscordAssistant
         */
         private static void setAvailableCommands()
         {
-            throw new NotImplementedException();
+            Ping ping = new Ping();
+            AvailableCommands.Add(ping);
         }
 
         /// <summary>
