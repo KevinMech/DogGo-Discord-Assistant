@@ -16,7 +16,7 @@ namespace DoggoDiscordAssistant
         public Server(Discord.Server server)
         {
             /* Since discords server class is not inheritable due to design restrictions (internal constructor), 
-            the discord server object will be encaspulated within this server class */
+            the discord server object will be encapsulated within this server class */
             ServerAPI = server;
 
             //Set default welcome message
