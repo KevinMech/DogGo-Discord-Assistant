@@ -10,11 +10,13 @@ namespace DoggoDiscordAssistant
     class DoggoDiscordAssistant : DiscordClient
     {
         public bool Debug { get; set; }
+        List<Server> servers = new List<Server>();
 
         public DoggoDiscordAssistant(Action<DiscordConfigBuilder> configFunc) : base (configFunc)
         {
             Logging.consoleLog("Connecting to server...", Logging.logType.System);
             Connect(3, 1000);
+            FindServers();
             MessageReceived += DoggoDiscordAssistant_MessageReceived;
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
@@ -58,6 +60,21 @@ namespace DoggoDiscordAssistant
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Find all servers that the bot is currently connected to
+        /// </summary>
+        private void FindServers()
+        {
+            Console.WriteLine();
+            Logging.consoleLog("Sniffing out servers...", Logging.logType.System);
+            foreach(Discord.Server discordserver in Servers)
+            {
+                Server server = new Server(discordserver);
+                servers.Add(server);
+            }
+            Logging.consoleLog("Servers found!", Logging.logType.System);
         }
 
         private void DoggoDiscordAssistant_MessageReceived(object sender, MessageEventArgs e)
