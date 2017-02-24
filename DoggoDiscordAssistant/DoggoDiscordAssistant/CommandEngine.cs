@@ -15,6 +15,7 @@ namespace DoggoDiscordAssistant
         */
         private static void setAvailableCommands()
         {
+            AvailableCommands.Clear();
             Ping ping = new Ping();
             AvailableCommands.Add(ping);
         }
