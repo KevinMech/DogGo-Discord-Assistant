@@ -32,7 +32,7 @@ namespace DoggoDiscordAssistant
                 //Split the message into seperate words and check to see if each word corresponds to a command
                 message = message.Remove(0, 1);
                 string[] splitMessage = message.Split(' ');
-                foreach(Command command in AvailableCommands)
+                foreach(Command command in AvailableCommands.ToList())
                 {
                     foreach(String word in splitMessage)
                     {
