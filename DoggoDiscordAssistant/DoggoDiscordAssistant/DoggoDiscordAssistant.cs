@@ -10,7 +10,7 @@ namespace DoggoDiscordAssistant
     class DoggoDiscordAssistant : DiscordClient
     {
         public bool Debug { get; set; }
-        List<Server> servers = new List<Server>();
+        public List<Server> servers { get; } = new List<Server>();
 
         public DoggoDiscordAssistant(Action<DiscordConfigBuilder> configFunc) : base (configFunc)
         {

@@ -22,6 +22,10 @@ namespace DoggoDiscordAssistant
                         if (bot.Debug) Console.WriteLine("Debug ON!");
                         else Console.WriteLine("Debug OFF!");
                         break;
+                    case "servers":
+                        Console.WriteLine("Currently in " + bot.servers.Count + " servers!");
+                        foreach (Server server in bot.servers) Console.WriteLine(server.ServerAPI.Name);
+                        break;
                 }
                 Console.WriteLine();
             }
