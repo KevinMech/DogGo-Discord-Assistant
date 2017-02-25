@@ -10,13 +10,14 @@ namespace DoggoDiscordAssistant
     class DoggoDiscordAssistant : DiscordClient
     {
         public bool Debug { get; set; }
+        bool ServerConnection = false;
         public List<Server> servers { get; } = new List<Server>();
 
         public DoggoDiscordAssistant(Action<DiscordConfigBuilder> configFunc) : base (configFunc)
         {
             Logging.consoleLog("Connecting to server...", Logging.logType.System);
             Connect(3, 1000);
-            FindServers();
+            LoadServers();
             MessageReceived += DoggoDiscordAssistant_MessageReceived;
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
@@ -63,18 +64,23 @@ namespace DoggoDiscordAssistant
         }
 
         /// <summary>
-        /// Find all servers that the bot is currently connected to
+        /// Sets up event handling for servers, then finds and loads all servers that the bot is currently connected to
         /// </summary>
-        private void FindServers()
+        private void LoadServers()
         {
             Console.WriteLine();
+            Logging.consoleLog("Setting up server handlers...", Logging.logType.System);
+            ServerAvailable += ((s, e) => ServerConnection = true);
+            ServerUnavailable += ((s, e) => ServerConnection = false);
             Logging.consoleLog("Sniffing out servers...", Logging.logType.System);
+            System.Threading.SpinWait.SpinUntil(() => ServerConnection);
             foreach(Discord.Server discordserver in Servers)
             {
                 Server server = new Server(discordserver);
                 servers.Add(server);
+                Logging.consoleLog("Server Found! Name: " + server.ServerAPI.Name + " ID: " + server.ServerAPI.Id, Logging.logType.System);
             }
-            Logging.consoleLog("Servers found!", Logging.logType.System);
+            Logging.consoleLog("All servers loaded!", Logging.logType.System);
         }
 
         private void DoggoDiscordAssistant_MessageReceived(object sender, MessageEventArgs e)
