@@ -19,12 +19,10 @@ namespace DoggoDiscordAssistant
             Connect(3, 1000);
             LoadServers();
             MessageReceived += DoggoDiscordAssistant_MessageReceived;
-            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
             while (true)
             {
                 AdminConsole.parseAdminInput(Console.ReadLine(), this);
-                Console.ForegroundColor = ConsoleColor.White;
             }
         }
 

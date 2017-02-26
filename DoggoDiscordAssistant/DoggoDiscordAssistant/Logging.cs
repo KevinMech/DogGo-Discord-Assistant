@@ -39,6 +39,7 @@ namespace DoggoDiscordAssistant
                     break;
             }
             Console.WriteLine(TimeStamp + " " + message);
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         /// <summary>
