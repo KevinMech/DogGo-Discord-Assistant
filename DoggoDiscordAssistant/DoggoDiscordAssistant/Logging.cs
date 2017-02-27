@@ -22,7 +22,7 @@ namespace DoggoDiscordAssistant
         /// </summary>
         public static void consoleLog(string message, logType logtype)
         {
-            string TimeStamp = "[" + DateTime.Now.ToLongTimeString() + "]";
+            string TimeStamp = DateTime.Now.ToLongTimeString() + " [" + logtype +"]";
             switch (logtype)
             {
                 case logType.System:
@@ -38,7 +38,7 @@ namespace DoggoDiscordAssistant
                     Console.ForegroundColor = ConsoleColor.Red;
                     break;
             }
-            Console.WriteLine(TimeStamp + " " + message);
+            Console.WriteLine(TimeStamp + ": " + message);
             Console.ForegroundColor = ConsoleColor.White;
         }
 
