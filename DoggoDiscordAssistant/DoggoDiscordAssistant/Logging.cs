@@ -49,8 +49,7 @@ namespace DoggoDiscordAssistant
         /// <param name="e"></param>
         public static void APIErrorLogHandling(object sender, LogMessageEventArgs e)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(e.Message);
+            consoleLog(e.Message, logType.Warning);
         }
     }
 }
