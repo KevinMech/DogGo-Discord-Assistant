@@ -20,6 +20,8 @@ namespace DoggoDiscordAssistant
             LoadServers();
             MessageReceived += DoggoDiscordAssistant_MessageReceived;
             Console.WriteLine();
+            Logging.consoleLog("DogGoDiscordAssistant is now online!", Logging.logType.System);
+            Console.WriteLine();
             while (true)
             {
                 AdminConsole.parseAdminInput(Console.ReadLine(), this);
