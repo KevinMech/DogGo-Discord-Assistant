@@ -45,5 +45,14 @@ namespace DoggoDiscordAssistant
                 }
             }
         }
+
+        public static void GreetUser(List<Server> servers, ulong ID)
+        {
+            //Find corresponding server by its IDS, and if match, send greeting message
+            foreach(Server server in servers)
+            {
+                if (ID == server.ServerAPI.Id) server.ServerAPI.DefaultChannel.SendMessage(server.Welcome);
+            }
+        }
     }
 }

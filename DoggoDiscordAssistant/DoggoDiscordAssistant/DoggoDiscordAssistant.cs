@@ -18,6 +18,7 @@ namespace DoggoDiscordAssistant
             Logging.consoleLog("Connecting to server...", Logging.logType.System);
             Connect(3, 1000);
             LoadServers();
+            UserJoined += DoggoDiscordAssistant_UserJoined;
             MessageReceived += DoggoDiscordAssistant_MessageReceived;
             Console.WriteLine();
             Logging.consoleLog("DogGoDiscordAssistant is now online!", Logging.logType.System);
@@ -81,6 +82,11 @@ namespace DoggoDiscordAssistant
                 Logging.consoleLog("Server Found! Name: " + server.ServerAPI.Name + " ID: " + server.ServerAPI.Id, Logging.logType.System);
             }
             Logging.consoleLog("All servers loaded!", Logging.logType.System);
+        }
+
+        private void DoggoDiscordAssistant_UserJoined(object sender, UserEventArgs e)
+        {
+            Task.Factory.StartNew(() => CommandEngine.GreetUser(servers, e.Server.Id));
         }
 
         private void DoggoDiscordAssistant_MessageReceived(object sender, MessageEventArgs e)
