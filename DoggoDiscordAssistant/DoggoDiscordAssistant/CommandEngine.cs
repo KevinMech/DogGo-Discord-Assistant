@@ -8,17 +8,7 @@ namespace DoggoDiscordAssistant
 {
     class CommandEngine
     {
-        public static List<Command> AvailableCommands { get; private set; } = new List<Command> { };
-
-        /*Temporary way to set all commands available that the bot can execute
-        Will be removed eventually and replaced with a better option
-        */
-        private static void setAvailableCommands()
-        {
-            AvailableCommands.Clear();
-            Ping ping = new Ping();
-            AvailableCommands.Add(ping);
-        }
+        private static List<Command> AvailableCommands;
 
         /// <summary>
         /// Queries the input of users chat and retrieves the command, flag and flag parameters
@@ -28,7 +18,6 @@ namespace DoggoDiscordAssistant
         {
             if (message[0] == '>')
             {
-                setAvailableCommands();
                 //Split the message into seperate words and check to see if each word corresponds to a command
                 message = message.Remove(0, 1);
                 string[] splitMessage = message.Split(' ');
