@@ -84,14 +84,36 @@ namespace DoggoDiscordAssistant
             Logging.consoleLog("All servers loaded!", Logging.logType.System);
         }
 
+        /// <summary>
+        /// Finds the server from the list of servers the bot is tracking using the discord server ID
+        /// </summary>
+        /// <returns>returns the server matched with its ID</returns>
+        private Server LocateServer(ulong ID)
+        {
+            Server returnedserver = null;
+            if (Debug == true) Logging.consoleLog("locating server with ID: " + ID, Logging.logType.Warning);
+            foreach(Server server in servers)
+            {
+                if (server.ServerAPI.Id == ID)
+                {
+                    if (Debug == true) Logging.consoleLog("Located Server! Server Name: " + server.ServerAPI.Name, Logging.logType.Warning);
+                    returnedserver = server;
+                }
+            }
+            if (Debug == true && returnedserver == null) Logging.consoleLog("No server found! returning null", Logging.logType.Warning);
+            return returnedserver;
+        }
+
         private void DoggoDiscordAssistant_UserJoined(object sender, UserEventArgs e)
         {
-            Task.Factory.StartNew(() => CommandEngine.GreetUser(servers, e.Server.Id));
+            Server server = LocateServer(e.Server.Id);
+            Task.Factory.StartNew(() => CommandEngine.GreetUser(server));
         }
 
         private void DoggoDiscordAssistant_MessageReceived(object sender, MessageEventArgs e)
         {
-            Task.Factory.StartNew(() => CommandEngine.parseInput(this, e.Channel, e.Message.Text));
+            Server server = LocateServer(e.Server.Id);
+            Task.Factory.StartNew(() => CommandEngine.parseInput(this, server, e.Channel, e.Message.Text));
         }
     }
 }

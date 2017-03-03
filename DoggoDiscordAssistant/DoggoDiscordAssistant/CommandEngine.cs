@@ -14,7 +14,7 @@ namespace DoggoDiscordAssistant
         /// Queries the input of users chat and retrieves the command, flag and flag parameters
         /// </summary>
         /// <param name="message"></param>
-        public static void parseInput(DoggoDiscordAssistant bot, Discord.Channel channel, string message)
+        public static void parseInput(DoggoDiscordAssistant bot, Server server, Discord.Channel channel, string message)
         {
             if (message[0] == '>')
             {
@@ -35,13 +35,9 @@ namespace DoggoDiscordAssistant
             }
         }
 
-        public static void GreetUser(List<Server> servers, ulong ID)
+        public static void GreetUser(Server server)
         {
-            //Find corresponding server by its IDS, and if match, send greeting message
-            foreach(Server server in servers)
-            {
-                if (ID == server.ServerAPI.Id) server.ServerAPI.DefaultChannel.SendMessage(server.Welcome);
-            }
+            server.ServerAPI.DefaultChannel.SendMessage(server.Welcome);
         }
     }
 }
