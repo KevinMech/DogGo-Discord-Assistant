@@ -8,8 +8,6 @@ namespace DoggoDiscordAssistant
 {
     class CommandEngine
     {
-        private static List<Command> AvailableCommands;
-
         /// <summary>
         /// Queries the input of users chat and retrieves the command, flag and flag parameters
         /// </summary>
@@ -21,7 +19,7 @@ namespace DoggoDiscordAssistant
                 //Split the message into seperate words and check to see if each word corresponds to a command
                 message = message.Remove(0, 1);
                 string[] splitMessage = message.Split(' ');
-                foreach(Command command in AvailableCommands.ToList())
+                foreach(Command command in server.AvailableCommands.ToList())
                 {
                     foreach(String word in splitMessage)
                     {
