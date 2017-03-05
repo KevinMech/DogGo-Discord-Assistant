@@ -14,20 +14,22 @@ namespace DoggoDiscordAssistant
         /// <param name="message"></param>
         public static void parseInput(DoggoDiscordAssistant bot, Server server, Discord.Channel channel, string message)
         {
+            string command;
+            Dictionary<string, string> flags = new Dictionary<string, string>();
+
             if (message[0] == '>')
             {
-                //Split the message into seperate words and check to see if each word corresponds to a command
+                //Discard command symbol and split the message into a list
                 message = message.Remove(0, 1);
-                string[] splitMessage = message.Split(' ');
-                foreach(Command command in server.AvailableCommands.ToList())
+                List<string> splitMessage = message.Split(' ').ToList<string>();
+                //Grab the command and discard it from the list
+                command = splitMessage[0];
+                splitMessage.RemoveAt(0);
+                foreach(Command dcommand in server.AvailableCommands.ToList())
                 {
-                    foreach(String word in splitMessage)
+                    if (command == dcommand.Identifier)
                     {
-                        if (word == command.Identifier)
-                        {
-                            command.Execute(channel);
-                            if (bot.Debug) Logging.consoleLog("Command Executed!", Logging.logType.System);
-                        }
+                        dcommand.Execute(channel);
                     }
                 }
             }
