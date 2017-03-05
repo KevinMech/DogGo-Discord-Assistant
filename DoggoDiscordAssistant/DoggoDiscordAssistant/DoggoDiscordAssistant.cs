@@ -113,7 +113,7 @@ namespace DoggoDiscordAssistant
         private void DoggoDiscordAssistant_MessageReceived(object sender, MessageEventArgs e)
         {
             Server server = LocateServer(e.Server.Id);
-            Task.Factory.StartNew(() => CommandEngine.parseInput(this, server, e.Channel, e.Message.Text));
+            Task.Factory.StartNew(() => CommandEngine.parseInput(this, server, e.Channel, e.User, e.Message.Text));
         }
     }
 }

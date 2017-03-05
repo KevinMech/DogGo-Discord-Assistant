@@ -13,7 +13,7 @@ namespace DoggoDiscordAssistant
         /// Queries the input of users chat and retrieves the command, flag and flag parameters
         /// </summary>
         /// <param name="message"></param>
-        public static void parseInput(DoggoDiscordAssistant bot, Server server, Discord.Channel channel, string message)
+        public static void parseInput(DoggoDiscordAssistant bot, Server server, Discord.Channel channel, Discord.User user, string message)
         {
             string command;
             string parameter;
@@ -34,6 +34,7 @@ namespace DoggoDiscordAssistant
                     if (command == rcommand.Identifier)
                     {
                         parameter = parseParameter();
+                        if (bot.Debug) Logging.consoleLog( user + " has executed command: " + command + Environment.NewLine + "Parameter: " + parameter, Logging.logType.Warning);
                         rcommand.Execute(channel);
                     }
                 }
