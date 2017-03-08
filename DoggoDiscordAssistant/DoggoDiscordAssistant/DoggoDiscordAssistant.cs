@@ -9,12 +9,15 @@ namespace DoggoDiscordAssistant
 {
     class DoggoDiscordAssistant : DiscordClient
     {
-        public bool Debug { get; set; }
+        string BotToken = null;
+        public bool Debug { get; set; } = true;
         bool ServerConnection = false;
         public List<Server> servers { get; } = new List<Server>();
 
-        public DoggoDiscordAssistant(Action<DiscordConfigBuilder> configFunc) : base (configFunc)
+        public DoggoDiscordAssistant(string token, Action<DiscordConfigBuilder> configFunc) : base (configFunc)
         {
+            Logging.consoleLog("Retrieving Token...", Logging.logType.System);
+            BotToken = token;
             Logging.consoleLog("Connecting to server...", Logging.logType.System);
             Connect(3, 1000);
             LoadServers();
@@ -42,7 +45,7 @@ namespace DoggoDiscordAssistant
                 {
                     Console.WriteLine();
                     Logging.consoleLog("attempting connection...[" + (tries + 1) + "/3]", Logging.logType.System);
-                    Task task = Task.Run(async () => await Connect(Token.getToken, TokenType.Bot));
+                    Task task = Task.Run(async () => await Connect(BotToken, TokenType.Bot));
                     task.Wait();
                     Logging.consoleLog("Connected to server!", Logging.logType.System);
                     break;
