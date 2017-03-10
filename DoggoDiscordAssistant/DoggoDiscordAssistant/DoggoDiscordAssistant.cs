@@ -94,16 +94,16 @@ namespace DoggoDiscordAssistant
         private Server LocateServer(ulong ID)
         {
             Server returnedserver = null;
-            if (Debug == true) Logging.consoleLog("locating server with ID: " + ID, Logging.logType.Warning);
+            if (Debug == true) Logging.consoleLog("locating server with ID: " + ID, Logging.logType.Debug);
             foreach(Server server in servers)
             {
                 if (server.ServerAPI.Id == ID)
                 {
-                    if (Debug == true) Logging.consoleLog("Located Server! Server Name: " + server.ServerAPI.Name, Logging.logType.Warning);
+                    if (Debug == true) Logging.consoleLog("Located Server! Server Name: " + server.ServerAPI.Name, Logging.logType.Debug);
                     returnedserver = server;
                 }
             }
-            if (Debug == true && returnedserver == null) Logging.consoleLog("No server found! returning null", Logging.logType.Warning);
+            if (Debug == true && returnedserver == null) Logging.consoleLog("No server found! returning null", Logging.logType.Debug);
             return returnedserver;
         }
 

@@ -34,7 +34,7 @@ namespace DoggoDiscordAssistant
                     if (command == rcommand.Identifier)
                     {
                         parameter = parseParameter();
-                        if (bot.Debug) Logging.consoleLog( user + " has executed command: " + command + Environment.NewLine + "Parameter: " + parameter, Logging.logType.Warning);
+                        if (bot.Debug) Logging.consoleLog( user + " has executed command: " + command + Environment.NewLine + "Parameter: " + parameter, Logging.logType.Debug);
                         rcommand.Execute(channel);
                     }
                 }

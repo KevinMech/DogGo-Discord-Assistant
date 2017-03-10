@@ -13,7 +13,7 @@ namespace DoggoDiscordAssistant
         {
             System,
             Info,
-            Warning,
+            Debug,
             Error
         }
 
@@ -31,7 +31,7 @@ namespace DoggoDiscordAssistant
                 case logType.Info:
                     Console.ForegroundColor = ConsoleColor.White;
                     break;
-                case logType.Warning:
+                case logType.Debug:
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     break;
                 case logType.Error:
