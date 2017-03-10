@@ -52,7 +52,8 @@ namespace DoggoDiscordAssistant
                     splitMessage.Remove(word);
                 }
             }
-            return parameter.TrimEnd();
+            if (parameter != null) parameter.TrimEnd();
+            return parameter;
         }
 
         public static void GreetUser(Server server)
