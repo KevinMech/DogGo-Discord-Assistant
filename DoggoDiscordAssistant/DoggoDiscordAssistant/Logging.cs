@@ -49,7 +49,7 @@ namespace DoggoDiscordAssistant
         /// <param name="e"></param>
         public static void APIErrorLogHandling(object sender, LogMessageEventArgs e)
         {
-            consoleLog(e.Message, logType.Warning);
+            consoleLog(e.Message, logType.Error);
         }
     }
 }
