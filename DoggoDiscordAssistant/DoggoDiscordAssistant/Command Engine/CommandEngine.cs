@@ -70,17 +70,15 @@ namespace DoggoDiscordAssistant
             string flag = null;
             string parameter = null;
             //Grab the first flag, delete its dash character, store it in string, then discard it
-            splitMessage[0].Remove(0, 1);
-            flag = splitMessage[0];
-            splitMessage.Remove(flag);
+            flag = splitMessage[0].Remove(0, 1);
+            splitMessage.Remove('-' + flag);
             foreach(string word in splitMessage.ToList())
             {
                 if(word[0] == '-')
                 {
                     //Store the flag and parameter inside the dictionary, and start a new flag
                     flags.Add(flag, parameter);
-                    splitMessage[0].Remove(0);
-                    flag = word;
+                    flag = word.Remove(0, 1);
                     parameter = "";
                 }
                 else
