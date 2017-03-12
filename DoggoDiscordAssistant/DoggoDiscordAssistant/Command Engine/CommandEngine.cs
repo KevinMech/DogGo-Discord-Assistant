@@ -18,7 +18,6 @@ namespace DoggoDiscordAssistant
             string command;
             string parameter;
             Dictionary<string, string> flags = new Dictionary<string, string>();
-
             if (message[0] == '>')
             {
                 //Discard command symbol and split the message into a list
@@ -34,7 +33,16 @@ namespace DoggoDiscordAssistant
                     if (command == rcommand.Identifier)
                     {
                         parameter = parseParameter();
-                        if (bot.Debug) Logging.consoleLog( user + " has executed command: " + command + Environment.NewLine + "Parameter: " + parameter, Logging.logType.Debug);
+                        flags = parseFlags();
+                        if (bot.Debug)
+                        {
+                            Logging.consoleLog(user + " has executed a command! " + Environment.NewLine + "Command: " + command + Environment.NewLine + "Parameter: " + parameter, Logging.logType.Debug);
+                            foreach (KeyValuePair<string, string> flag in flags)
+                            {
+                                Logging.consoleLog("flag: " + flag.Key + " parameter: " + flag.Value, Logging.logType.Debug);
+                            }
+                            
+                        }
                         rcommand.Execute(channel);
                     }
                 }
@@ -56,6 +64,33 @@ namespace DoggoDiscordAssistant
             return parameter;
         }
 
+        private static Dictionary<string, string> parseFlags()
+        {
+            Dictionary<string, string> flags = new Dictionary<string, string>();
+            string flag = null;
+            string parameter = null;
+            //Grab the first flag, delete its dash character, store it in string, then discard it
+            splitMessage[0].Remove(0, 1);
+            flag = splitMessage[0];
+            splitMessage.Remove(flag);
+            foreach(string word in splitMessage.ToList())
+            {
+                if(word[0] == '-')
+                {
+                    //Store the flag and parameter inside the dictionary, and start a new flag
+                    flags.Add(flag, parameter);
+                    splitMessage[0].Remove(0);
+                    flag = word;
+                    parameter = "";
+                }
+                else
+                {
+                    parameter += word + " ";
+                }
+            }
+            flags.Add(flag, parameter);
+            return flags;
+        }
         public static void GreetUser(Server server)
         {
             server.ServerAPI.DefaultChannel.SendMessage(server.Welcome);
