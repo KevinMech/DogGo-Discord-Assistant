@@ -39,7 +39,9 @@ namespace DoggoDiscordAssistant
                             Logging.consoleLog(user + " has executed a command! " + Environment.NewLine + "Command: " + command + Environment.NewLine + "Parameter: " + parameter, Logging.logType.Debug);
                             foreach (KeyValuePair<string, string> flag in flags)
                             {
-                                Logging.consoleLog("flag: " + flag.Key + " parameter: " + flag.Value, Logging.logType.Debug);
+                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.WriteLine("Flag: " + flag.Key + " Parameter: " + flag.Value, Logging.logType.Debug);
+                                Console.ForegroundColor = ConsoleColor.White;
                             }
                             
                         }
