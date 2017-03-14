@@ -42,6 +42,11 @@ namespace DoggoDiscordAssistant
             Console.ForegroundColor = ConsoleColor.White;
         }
 
+        public static void consoleBreak()
+        {
+            Console.WriteLine("---------------------------------------------------------");
+        }
+
         /// <summary>
         /// Logs any errors encountered by the discord API and prints to console screen
         /// </summary>

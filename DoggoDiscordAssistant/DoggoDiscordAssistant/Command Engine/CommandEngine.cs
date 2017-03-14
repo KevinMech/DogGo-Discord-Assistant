@@ -43,7 +43,6 @@ namespace DoggoDiscordAssistant
                                 Console.WriteLine("Flag: " + flag.Key + " Parameter: " + flag.Value, Logging.logType.Debug);
                                 Console.ForegroundColor = ConsoleColor.White;
                             }
-                            
                         }
                         rcommand.Execute(channel);
                     }

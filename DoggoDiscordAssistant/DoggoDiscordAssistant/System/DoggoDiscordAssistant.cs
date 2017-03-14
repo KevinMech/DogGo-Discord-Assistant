@@ -18,12 +18,13 @@ namespace DoggoDiscordAssistant
         {
             Logging.consoleLog("Retrieving Token...", Logging.logType.System);
             BotToken = token;
+            Logging.consoleBreak();
             Logging.consoleLog("Connecting to server...", Logging.logType.System);
             Connect(3, 1000);
             LoadServers();
             UserJoined += DoggoDiscordAssistant_UserJoined;
             MessageReceived += DoggoDiscordAssistant_MessageReceived;
-            Console.WriteLine();
+            Logging.consoleBreak();
             Logging.consoleLog("DogGoDiscordAssistant is now online!", Logging.logType.System);
             Console.WriteLine();
             while (true)
@@ -43,7 +44,6 @@ namespace DoggoDiscordAssistant
             {
                 try
                 {
-                    Console.WriteLine();
                     Logging.consoleLog("attempting connection...[" + (tries + 1) + "/3]", Logging.logType.System);
                     Task task = Task.Run(async () => await Connect(BotToken, TokenType.Bot));
                     task.Wait();
@@ -55,10 +55,14 @@ namespace DoggoDiscordAssistant
                     Logging.consoleLog("Failed!", Logging.logType.Error);
                     foreach (Exception exception in e.InnerExceptions) Logging.consoleLog(exception.Message, Logging.logType.Error);
                     //If bot fails to connect to server, print error to screen and exit program
-                    if (tries < (maxTries - 1)) System.Threading.Thread.Sleep(timeout);
+                    if (tries < (maxTries - 1))
+                    {
+                        System.Threading.Thread.Sleep(timeout);
+                        Logging.consoleBreak();
+                    }
                     else
                     {
-                        Console.WriteLine();
+                        Logging.consoleBreak();
                         Logging.consoleLog("Could not connect to server!", Logging.logType.Error);
                         Console.ReadLine();
                         Environment.Exit(0);
@@ -72,7 +76,7 @@ namespace DoggoDiscordAssistant
         /// </summary>
         private void LoadServers()
         {
-            Console.WriteLine();
+            Logging.consoleBreak();
             Logging.consoleLog("Setting up server handlers...", Logging.logType.System);
             ServerAvailable += ((s, e) => ServerConnection = true);
             ServerUnavailable += ((s, e) => ServerConnection = false);
@@ -94,7 +98,11 @@ namespace DoggoDiscordAssistant
         private Server LocateServer(ulong ID)
         {
             Server returnedserver = null;
-            if (Debug == true) Logging.consoleLog("locating server with ID: " + ID, Logging.logType.Debug);
+            if (Debug == true)
+            {
+                Logging.consoleBreak();
+                Logging.consoleLog("locating server with ID: " + ID, Logging.logType.Debug);
+            }
             foreach(Server server in servers)
             {
                 if (server.ServerAPI.Id == ID)
