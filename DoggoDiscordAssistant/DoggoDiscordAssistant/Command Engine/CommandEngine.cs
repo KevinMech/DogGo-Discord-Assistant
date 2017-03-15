@@ -44,7 +44,7 @@ namespace DoggoDiscordAssistant
                                 Console.ForegroundColor = ConsoleColor.White;
                             }
                         }
-                        rcommand.Execute(channel);
+                        rcommand.Execute(server, channel, user, parameter, flags);
                     }
                 }
             }
