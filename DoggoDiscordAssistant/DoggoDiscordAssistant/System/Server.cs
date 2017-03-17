@@ -10,11 +10,12 @@ namespace DoggoDiscordAssistant
     class Server
     {
         public Discord.Server ServerAPI { get; }
-        public string Welcome { get; }
+        public string Welcome { get; set; }
         public string Leave { get; }
         //Initialize all available commands for the server
         public List<Command> AvailableCommands { get; set; } = new List<Command> {
-            new Ping()
+            new Ping(),
+            new Commands.Config()
         };
 
         public Server(Discord.Server server)

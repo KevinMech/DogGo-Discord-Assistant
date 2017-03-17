@@ -71,6 +71,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Config.cs" />
     <Compile Include="Console\AdminConsole.cs" />
     <Compile Include="Command Engine\Command.cs" />
     <Compile Include="Command Engine\CommandEngine.cs" />
