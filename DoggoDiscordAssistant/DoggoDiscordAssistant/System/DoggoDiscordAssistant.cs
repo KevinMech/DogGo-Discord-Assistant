@@ -123,7 +123,7 @@ namespace DoggoDiscordAssistant
 
         private void DoggoDiscordAssistant_MessageReceived(object sender, MessageEventArgs e)
         {
-            if(!e.User.IsBot)
+            if(e.Message.RawText != "" && !e.User.IsBot)
             {
                 Server server = LocateServer(e.Server.Id);
                 Task.Factory.StartNew(() => CommandEngine.parseInput(this, server, e.Channel, e.User, e.Message.Text));
