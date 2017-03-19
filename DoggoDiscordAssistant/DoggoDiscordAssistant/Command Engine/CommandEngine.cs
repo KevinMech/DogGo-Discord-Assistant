@@ -18,34 +18,31 @@ namespace DoggoDiscordAssistant
             string command;
             string parameter;
             Dictionary<string, string> flags = new Dictionary<string, string>();
-            if (message[0] == '>')
+            //Discard command symbol and split the message into a list
+            message = message.Remove(0, 1);
+            splitMessage = message.Split(' ').ToList<string>();
+            //Grab the command and discard it from the list
+            command = splitMessage[0];
+            splitMessage.RemoveAt(0);
+            /*If command matches a registered command identifier, continue parsing for the parameter,
+            flags and flag parameter, and then execute the command*/
+            foreach(Command rcommand in server.AvailableCommands.ToList())
             {
-                //Discard command symbol and split the message into a list
-                message = message.Remove(0, 1);
-                splitMessage = message.Split(' ').ToList<string>();
-                //Grab the command and discard it from the list
-                command = splitMessage[0];
-                splitMessage.RemoveAt(0);
-                /*If command matches a registered command identifier, continue parsing for the parameter,
-                flags and flag parameter, and then execute the command*/
-                foreach(Command rcommand in server.AvailableCommands.ToList())
+                if (command == rcommand.Identifier)
                 {
-                    if (command == rcommand.Identifier)
+                    parameter = parseParameter();
+                    flags = parseFlags();
+                    if (bot.Debug)
                     {
-                        parameter = parseParameter();
-                        flags = parseFlags();
-                        if (bot.Debug)
+                        Logging.consoleLog(user.Name + " has executed a command! " + Environment.NewLine + "Command: " + command + Environment.NewLine + "Parameter: " + parameter, Logging.logType.Debug);
+                        foreach (KeyValuePair<string, string> flag in flags)
                         {
-                            Logging.consoleLog(user + " has executed a command! " + Environment.NewLine + "Command: " + command + Environment.NewLine + "Parameter: " + parameter, Logging.logType.Debug);
-                            foreach (KeyValuePair<string, string> flag in flags)
-                            {
-                                Console.ForegroundColor = ConsoleColor.Yellow;
-                                Console.WriteLine("Flag: " + flag.Key + " Parameter: " + flag.Value, Logging.logType.Debug);
-                                Console.ForegroundColor = ConsoleColor.White;
-                            }
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("Flag: " + flag.Key + " Parameter: " + flag.Value, Logging.logType.Debug);
+                            Console.ForegroundColor = ConsoleColor.White;
                         }
-                        rcommand.Execute(server, channel, user, parameter, flags);
                     }
+                    rcommand.Execute(server, channel, user, parameter, flags);
                 }
             }
         }
